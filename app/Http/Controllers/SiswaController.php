@@ -8,7 +8,7 @@ class SiswaController extends Controller
 {
     function index()
     {
-        return "saya controller index";
+        return "saya controller index baru";
     }
 
     function detail($id)
