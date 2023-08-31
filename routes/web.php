@@ -15,12 +15,7 @@ use App\Http\Controllers\HalamanController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('siswa',[SiswaController::class, 'index']);
-Route::get('siswa/{id}', [SiswaController::class, 'detail']);
+Route::resource('siswa', SiswaController::class);
 
 Route::get('/', [HalamanController::class, 'index']);
 Route::get('/tentang', [HalamanController::class, 'tentang']);
