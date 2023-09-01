@@ -59,7 +59,7 @@ class SiswaController extends Controller
         ];
 
         siswa::create($data);
-        return redirect('siswa')->with('sukses','BerhasilMemasukan Data');
+        return redirect('siswa')->with('sukses','Berhasil Memasukan Data');
     }
 
     /**
@@ -82,7 +82,8 @@ class SiswaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = siswa::where('nomor_induk', $id)->first();
+        return view('siswa.edit')->with('data', $data);
     }
 
     /**
@@ -94,7 +95,20 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+            'alamat' => 'required'
+        ],[
+            'nama.required' => 'Nama Wajib Di Isi',
+            'alamat.required' => 'Alamat Wajib Di Isi'
+        ]);
+        $data = [
+            'nama' => $request->input('nama'),
+            'alamat' => $request->input('alamat')
+        ];
+
+        siswa::where('nomor_induk', $id)->update($data);
+        return redirect('/siswa')->with('sukses','berhasil update data');
     }
 
     /**
@@ -105,6 +119,7 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        siswa::where('nomor_induk', $id)->delete();
+        return redirect('/siswa')->with('sukses','berhasil hapus data');
     }
 }
