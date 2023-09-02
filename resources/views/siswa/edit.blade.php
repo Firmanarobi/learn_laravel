@@ -2,7 +2,7 @@
 
 @section('konten')
 <a href="/siswa" class="btn btn-secondary"> << kembali </a>
-    <form method="post" action="{{ '/siswa/'.$data->nomor_induk }}">
+    <form method="post" action="{{ '/siswa/'.$data->nomor_induk }}" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="mb-3">
@@ -17,6 +17,15 @@
         <div class="mb-3">
             <label for="alamat" class="form-label">Alamat</label>
             <textarea class="form-control" name="alamat" > {{ $data->alamat }}</textarea>
+        </div>
+
+        <td>@if ($data->foto)
+            <img src="{{ url('foto').'/'.$data->foto }}" style="max-width:50px;max-height:50px">
+        @endif</td>
+
+        <div class="mb-3">
+            <label for="foto" class="form-label">Foto</label>
+            <input type="file" class="form-control" name="foto" id="foto">
         </div>
 
         <div class="mb-3">
